@@ -1,5 +1,6 @@
+import "../styles/App.css"
 function App() {
-  return <div className='text-3xl font-bold underline'>App</div>;
+  return <div>App</div>;
 }
 
 export default App;
