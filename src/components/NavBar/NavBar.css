@@ -11,6 +11,7 @@
     display: flex;
     align-items: center;
     gap: 5px;
+    cursor: pointer;
 }
 
 .logo span
@@ -20,23 +21,20 @@
     font-weight: 700;
 }
 
-.navbar-dropdown
-{
-    padding: 10px 20px;
-}
+
 
 .left-nav
 {
     display: flex;
     align-items: center;
-    gap: 30px;
+    gap: 10px;
 }
 
 
 .navbar-dropdown
 {
  display: flex;
- gap: 50px;
+ gap: 20px;
  font-size: 16px;
  font-weight: 600;
  cursor: pointer;
@@ -55,11 +53,13 @@
     padding: 10px 20px;
     outline: none;
     width: 100%;
-    font-size: 16px;
+    font-size: 14px;
     color: gray;
     font-weight: 500;
-    background-color: lightgray;
+    background-color: rgba(211, 211, 211, 0.523);
+
     border-radius: 10px;
+    text-align: center;
     
 }
 
@@ -79,11 +79,13 @@
 .login-logout
 {
     border: 1px solid red;
-    padding: 10px 30px;
+    padding: 10px 10px;
     background-color: orangered;
     border-radius: 10px;
     font-weight: 600;
     color: white;
+    width: 150px;
+    text-align: center;
 }
 
 hr{
@@ -94,3 +96,4 @@ hr{
     background-color: lightgray;
     margin: 0 auto;
 }
+

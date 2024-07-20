@@ -7,7 +7,7 @@ import ControlledSwitches from "../Toggle/Toggle";
 import chatIcon from "../../assets/chat-icon.png";
 function NavBar() {
   return (
-    <div>
+    <div className="nav-container">
       <div className="NavBar">
         <div className="logo">
           <img src={Logo} alt="" style={{ height: "50px", width: "50px" }} />
@@ -41,7 +41,7 @@ function NavBar() {
           </div>
           <div className="login-logout">
             <NavLink to="" style={{ textDecoration: "none", color: "white" }}>
-              Login
+              Login/Logout
             </NavLink>
           </div>
         </div>
