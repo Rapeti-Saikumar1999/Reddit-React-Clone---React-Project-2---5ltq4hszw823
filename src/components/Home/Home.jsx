@@ -16,7 +16,7 @@ import axios from "axios";
 import { useAuth } from "../../Auth/AuthContextProvider";
 import Login from "../LoginSignUp/Login";
 import SignUp from "../LoginSignUp/SignUp";
-
+import AddIcon from "@mui/icons-material/Add";
 function Home() {
   const {
     searchValue,
@@ -90,6 +90,14 @@ function Home() {
 
   return (
     <div className="Home-container">
+      <div className="side-bar">
+        <div className="side-bar-community">
+          <h4>My Communities</h4>
+          <p className="addCommunity">
+            <AddIcon /> Create Community
+          </p>
+        </div>
+      </div>
       <div className="right-home-container">
         <div className="right-home">
           <div className="create-post-home">
@@ -166,7 +174,7 @@ function Home() {
       </div>
       <div className="left-home-container">
         <div className="popular-communities">
-          <h2 className="popular-communities-heading">Popular Communities</h2>
+          <h2 className="popular-communities-heading">Popular Communities </h2>
           {communities.map((community) => {
             return (
               <div className="community">
