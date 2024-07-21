@@ -52,6 +52,7 @@ function NavBar() {
           <div className="login-logout">
             {isLoggedIn ? (
               <NavLink
+                to="/"
                 style={{ textDecoration: "none", color: "white" }}
                 onClick={() => {
                   setIsLoggedIn(!isLoggedIn);

@@ -17,13 +17,16 @@ import { useAuth } from "../../Auth/AuthContextProvider";
 import Login from "../LoginSignUp/Login";
 import SignUp from "../LoginSignUp/SignUp";
 import AddIcon from "@mui/icons-material/Add";
+import { useNavigate } from "react-router-dom";
 function Home() {
+  const navigate = useNavigate();
   const {
     searchValue,
     modalOpen,
     setModalOpen,
     SignUpModalOpen,
     setSignUpModalOpen,
+    isLoggedIn,
   } = useAuth();
 
   const [communities, setCommunities] = useState([]);
@@ -93,7 +96,16 @@ function Home() {
       <div className="side-bar">
         <div className="side-bar-community">
           <h4>My Communities</h4>
-          <p className="addCommunity">
+          <p
+            className="addCommunity"
+            onClick={() => {
+              if (isLoggedIn) {
+                navigate("/community");
+              } else {
+                setModalOpen(!modalOpen);
+              }
+            }}
+          >
             <AddIcon /> Create Community
           </p>
         </div>
