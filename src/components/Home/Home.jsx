@@ -8,8 +8,24 @@ import WhatshotRoundedIcon from "@mui/icons-material/WhatshotRounded";
 import Brightness5RoundedIcon from "@mui/icons-material/Brightness5Rounded";
 import NorthIcon from "@mui/icons-material/North";
 import RedditIcon from "@mui/icons-material/Reddit";
+import ThumbUpIcon from "@mui/icons-material/ThumbUp";
+import ThumbDownIcon from "@mui/icons-material/ThumbDown";
+import InsertCommentIcon from "@mui/icons-material/InsertComment";
+import ShareIcon from "@mui/icons-material/Share";
 import axios from "axios";
+import { useAuth } from "../../Auth/AuthContextProvider";
+import Login from "../LoginSignUp/Login";
+import SignUp from "../LoginSignUp/SignUp";
+
 function Home() {
+  const {
+    searchValue,
+    modalOpen,
+    setModalOpen,
+    SignUpModalOpen,
+    setSignUpModalOpen,
+  } = useAuth();
+
   const [communities, setCommunities] = useState([]);
   const [Posts, setPosts] = useState([]);
   const fetchPosts = async () => {
@@ -26,8 +42,6 @@ function Home() {
     setPosts(response.data.data);
   };
 
-  console.log(Posts);
-
   const fetchCommunities = async () => {
     const config = {
       headers: {
@@ -42,10 +56,37 @@ function Home() {
     setCommunities(response.data.data);
   };
 
+  const filterSearch = async () => {
+    try {
+      const config = {
+        headers: {
+          projectID: "5ltq4hszw823",
+        },
+      };
+      const response = await axios.get(
+        `https://academics.newtonschool.co/api/v1/reddit/post?filter={"author.name":"${searchValue}"}`,
+        config
+      );
+
+      setPosts(response.data.data);
+    } catch (error) {
+      alert(error.message);
+      console.log(error.message);
+    }
+  };
+
   useEffect(() => {
     fetchCommunities();
     fetchPosts();
   }, []);
+
+  useEffect(() => {
+    if (searchValue === "") {
+      fetchPosts();
+    } else {
+      filterSearch();
+    }
+  }, [searchValue]);
 
   return (
     <div className="Home-container">
@@ -98,7 +139,25 @@ function Home() {
                     <p className="post-content">{post.content}</p>
                     <img src={post.images} alt="" />
                   </div>
-                  <div className="post-footer"></div>
+                  <div className="post-footer">
+                    <p>
+                      <div>
+                        <ThumbUpIcon />
+                        {post.likeCount > 0 ? post.likeCount : ""}
+                      </div>
+                      <div>
+                        <ThumbDownIcon />
+                        {post.dislikeCount > 0 ? post.dislikeCount : ""}
+                      </div>
+                    </p>
+                    <p>
+                      <InsertCommentIcon />
+                      {post.commentCount > 0 ? post.commentCount : ""}
+                    </p>
+                    <p>
+                      <ShareIcon />
+                    </p>
+                  </div>
                 </div>
               );
             })}
@@ -118,6 +177,24 @@ function Home() {
           })}
         </div>
       </div>
+      {modalOpen && (
+        <Login
+          close={() => setModalOpen(!modalOpen)}
+          openSignUp={() => {
+            setSignUpModalOpen(!SignUpModalOpen);
+            setModalOpen(!modalOpen);
+          }}
+        />
+      )}
+      {SignUpModalOpen && (
+        <SignUp
+          close={() => setSignUpModalOpen(!SignUpModalOpen)}
+          openLogin={() => {
+            setSignUpModalOpen(!SignUpModalOpen);
+            setModalOpen(!modalOpen);
+          }}
+        />
+      )}
     </div>
   );
 }

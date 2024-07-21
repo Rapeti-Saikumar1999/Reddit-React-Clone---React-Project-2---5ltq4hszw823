@@ -5,7 +5,11 @@ import Logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
 import ControlledSwitches from "../Toggle/Toggle";
 import chatIcon from "../../assets/chat-icon.png";
+import { useAuth } from "../../Auth/AuthContextProvider";
 function NavBar() {
+  const { setSearchValue, setModalOpen, modalOpen, isLoggedIn, setIsLoggedIn } =
+    useAuth();
+  console.log(isLoggedIn);
   return (
     <div className="nav-container">
       <div className="NavBar">
@@ -22,7 +26,13 @@ function NavBar() {
           </NavLink>
         </div>
         <div className="search-bar">
-          <input type="text" name="" id="" placeholder="Search Reddit" />
+          <input
+            type="text"
+            name=""
+            id=""
+            placeholder="Search Reddit"
+            onChange={(e) => setSearchValue(e.target.value)}
+          />
         </div>
         <div className="left-nav">
           <div className="chat-icon" style={{ cursor: "not-allowed" }}>
@@ -40,9 +50,24 @@ function NavBar() {
             </NavLink>
           </div>
           <div className="login-logout">
-            <NavLink to="" style={{ textDecoration: "none", color: "white" }}>
-              Login/Logout
-            </NavLink>
+            {isLoggedIn ? (
+              <NavLink
+                style={{ textDecoration: "none", color: "white" }}
+                onClick={() => {
+                  setIsLoggedIn(!isLoggedIn);
+                  sessionStorage.clear();
+                }}
+              >
+                Logout
+              </NavLink>
+            ) : (
+              <NavLink
+                style={{ textDecoration: "none", color: "white" }}
+                onClick={() => setModalOpen(!modalOpen)}
+              >
+                Login
+              </NavLink>
+            )}
           </div>
         </div>
       </div>

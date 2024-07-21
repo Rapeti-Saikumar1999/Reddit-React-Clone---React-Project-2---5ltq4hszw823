@@ -157,8 +157,16 @@ color: gray;
 .post-body img
 {
 width: 100%;
+border-radius: 5px;
 }
 
+.post-footer
+{
+    display: flex;
+    color: gray;
+    gap: 10px;
+    margin-left: 10px;
+}
 
 .post-content
 {
@@ -169,4 +177,19 @@ width: 100%;
     -webkit-line-clamp: 1; /* Limit to 1 line */
     -webkit-box-orient: vertical;
     font-weight: 500;
+}
+
+.post-footer p div
+{
+display: flex;
+align-items: center;
+gap: 5px;
+
+}
+
+.post-footer p
+{
+    display: flex;
+    align-items: center;
+    gap: 10px;
 }
