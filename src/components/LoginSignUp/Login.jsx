@@ -40,6 +40,7 @@ const Login = ({ close, openSignUp }) => {
       const token = response.data.token;
       if (token) {
         sessionStorage.setItem("token", token);
+        sessionStorage.setItem("userId", response.data.data.user._id);
         close();
         setIsLoggedIn(true);
       }

@@ -1,4 +1,4 @@
-import React, { useEffect, useState } from "react";
+import React, { useEffect, useId, useState } from "react";
 import "./Styles/Home.css";
 import ImageIcon from "@mui/icons-material/Image";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -20,6 +20,7 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
+  const [myCommunities, setMyCommunities] = useState([]);
   const {
     searchValue,
     modalOpen,
@@ -52,7 +53,7 @@ function Home() {
       },
     };
     const response = await axios.get(
-      "https://academics.newtonschool.co/api/v1/reddit/channel?limit=10",
+      "https://academics.newtonschool.co/api/v1/reddit/channel?limit=100",
       config
     );
 
@@ -78,6 +79,32 @@ function Home() {
     }
   };
 
+  const fetchMyCommunities = async () => {
+    try {
+      const token = sessionStorage.getItem("token");
+      const userId = sessionStorage.getItem("userId");
+      console.log("userid :" + userId);
+      const config = {
+        headers: {
+          Authorization: `Bearer ${token}`,
+          projectID: "5ltq4hszw823",
+        },
+      };
+
+      const response = await axios.get(
+        "https://academics.newtonschool.co/api/v1/reddit/channel/",
+        config
+      );
+      console.log(response.data.data[0].owner._id);
+      const myCommunitiesList = response.data.data.filter((e) => {
+        return e.owner._id === userId;
+      });
+      setMyCommunities(myCommunitiesList);
+    } catch (error) {
+      alert(error.message);
+    }
+  };
+
   useEffect(() => {
     fetchCommunities();
     fetchPosts();
@@ -90,6 +117,10 @@ function Home() {
       filterSearch();
     }
   }, [searchValue]);
+
+  useEffect(() => {
+    fetchMyCommunities();
+  }, []);
 
   return (
     <div className="Home-container">
@@ -108,6 +139,19 @@ function Home() {
           >
             <AddIcon /> Create Community
           </p>
+          <div className="myCommunities">
+            {myCommunities.map((e) => {
+              return (
+                <p className="myEachCommunity">
+                  {" "}
+                  <Face2RoundedIcon
+                    style={{ fill: "blue", margin: "10px 10px 10px 10px" }}
+                  />
+                  {e.name}
+                </p>
+              );
+            })}
+          </div>
         </div>
       </div>
       <div className="right-home-container">
@@ -190,7 +234,13 @@ function Home() {
           {communities.map((community) => {
             return (
               <div className="community">
-                <img src={community.image} alt="" width={50} />
+                {community.image ? (
+                  <img src={community.image} alt="" width={50} />
+                ) : (
+                  <Face2RoundedIcon
+                    style={{ fill: "orangered", margin: "10px 10px 10px 10px" }}
+                  />
+                )}
                 <span>{community.name}</span>
               </div>
             );

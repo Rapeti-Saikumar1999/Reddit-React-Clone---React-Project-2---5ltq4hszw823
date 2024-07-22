@@ -6,10 +6,12 @@ import { NavLink } from "react-router-dom";
 import ControlledSwitches from "../Toggle/Toggle";
 import chatIcon from "../../assets/chat-icon.png";
 import { useAuth } from "../../Auth/AuthContextProvider";
+import { useNavigate } from "react-router";
 function NavBar() {
   const { setSearchValue, setModalOpen, modalOpen, isLoggedIn, setIsLoggedIn } =
     useAuth();
   console.log(isLoggedIn);
+  const navigate = useNavigate();
   return (
     <div className="nav-container">
       <div className="NavBar">
@@ -52,11 +54,11 @@ function NavBar() {
           <div className="login-logout">
             {isLoggedIn ? (
               <NavLink
-                to="/"
                 style={{ textDecoration: "none", color: "white" }}
                 onClick={() => {
                   setIsLoggedIn(!isLoggedIn);
                   sessionStorage.clear();
+                  navigate("/");
                 }}
               >
                 Logout

@@ -1,14 +1,14 @@
 import React, { useState } from "react";
 import "./Styles/Community.css";
+import { useNavigate } from "react-router-dom";
 import axios from "axios";
 function Community() {
-  const [Image, setImage] = useState(null);
+  const navigate = useNavigate();
   const [Title, setTitle] = useState("");
   const [Desc, setDesc] = useState("");
   const HandleCreateCommunity = async (e) => {
     e.preventDefault();
     if (Image && Title && Desc) {
-      console.log("1");
       try {
         const token = sessionStorage.getItem("token");
         const config = {
@@ -18,22 +18,21 @@ function Community() {
           },
         };
         const formData = new FormData();
-        // formData.append("title", Title);
         formData.append("name", Title);
         formData.append("description", Desc);
-        formData.append("image", Image);
 
         const response = await axios.post(
           "https://academics.newtonschool.co/api/v1/reddit/channel/",
           formData,
           config
         );
-        console.log("3");
-        console.log(response);
+
+        setTitle("");
+        setDesc("");
+        navigate("/");
+        console.log(response.data.data.owner);
       } catch (error) {
         alert(error.message);
-        console.error("Error response:", error.response.data);
-        console.error("Error status:", error.response.status);
       }
     } else {
       alert("Please enter all fields");
@@ -42,6 +41,9 @@ function Community() {
 
   const HandleCancelCommunity = (e) => {
     e.preventDefault();
+    setTitle("");
+    setDesc("");
+    navigate("/");
   };
   return (
     <div className="community-container">
@@ -60,17 +62,62 @@ function Community() {
           value={Desc}
           onChange={(e) => setDesc(e.target.value)}
         ></textarea>
-        {/* <div className="fileInput">
-          <label htmlFor="">Image</label>
-          <input
-            type="file"
-            name="Image"
-            id=""
-            placeholder="Image"
-            value={Image}
-            onChange={(e) => setImage(e.target.value)}
-          />
-        </div> */}
+        {/*  */}
+        <div className="radio-btns">
+          <div>
+            <input
+              type="radio"
+              name="radio"
+              id="public"
+              defaultChecked
+              style={{ cursor: "not-allowed" }}
+            />
+            <label htmlFor="public">
+              <p>Public </p>
+              <span>Anyone can view, post, and comment to this community</span>
+            </label>
+          </div>
+          <div>
+            <input
+              type="radio"
+              name="radio"
+              id="restricted"
+              disabled
+              style={{ cursor: "not-allowed" }}
+            />
+            <label htmlFor="restricted">
+              <p>Restricted </p>
+              <span>
+                Anyone can view this community, but only approved users can post
+              </span>
+            </label>
+          </div>{" "}
+          <div>
+            <input
+              type="radio"
+              name="radio"
+              id="private"
+              disabled
+              style={{ cursor: "not-allowed" }}
+            />
+            <label htmlFor="private">
+              <p>Private </p>
+              <span>
+                Only approved users can view and submit to this community
+              </span>
+            </label>
+          </div>
+        </div>
+        <div className="adult-content" style={{ cursor: "not-allowed" }}>
+          <h4>Adult content</h4>
+          <div>
+            <input type="checkbox" name="che" id="che" defaultChecked />
+            <label htmlFor="che">
+              <span>NSFW</span> 18+ year old community
+            </label>
+          </div>
+        </div>
+        {/*  */}
         <div className="create-community-buttons">
           <button
             style={{ backgroundColor: "blue", color: "white" }}
@@ -80,7 +127,7 @@ function Community() {
           </button>
           <button
             style={{ border: "1px solid blue", color: "blue" }}
-            onSubmit={HandleCancelCommunity}
+            onClick={(e) => HandleCancelCommunity(e)}
           >
             Cancel
           </button>

@@ -61,3 +61,74 @@ textarea
   font-weight: 600;
   margin-right: 20px;
 }
+
+
+.radio-btns
+{
+display: flex;
+flex-direction: column;
+gap: 10px;
+}
+
+
+.radio-btns div{
+    display: flex;
+}
+
+
+
+.radio-btns div input
+{
+    border: unset;
+    border-radius: unset;
+    padding:unset;
+    letter-spacing:unset;
+    width: unset;
+    outline: none;
+}
+
+.radio-btns div label
+{
+    display: flex;
+    margin-left: 20px;
+}
+
+.radio-btns div label p{
+font-weight: 600;
+margin-right: 10px;
+}
+
+
+.radio-btns div label span{
+    font-size: 14px;
+    color: gray;
+}
+
+
+.adult-content
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.adult-content div {
+    display: flex;
+    flex-direction: row;
+}
+
+.adult-content div input{
+    width: unset;
+    margin-right: 20px;
+
+}
+
+.adult-content span
+{
+    font-weight: 600;
+}
+
+.adult-content label
+{
+    font-weight: 500;
+}
