@@ -11,25 +11,29 @@ function Community() {
       console.log("1");
       try {
         const token = sessionStorage.getItem("token");
-        console.log("2");
-        let formData = new FormData();
-        formData.append("title", Title);
+        const config = {
+          headers: {
+            Authorization: `Bearer ${token}`,
+            projectID: "5ltq4hszw823",
+          },
+        };
+        const formData = new FormData();
+        // formData.append("title", Title);
+        formData.append("name", Title);
         formData.append("description", Desc);
-        formData.append("images", Image);
+        formData.append("image", Image);
 
         const response = await axios.post(
           "https://academics.newtonschool.co/api/v1/reddit/channel/",
           formData,
-          {
-            headers: {
-              Authorization: `Bearer ${token}`,
-              projectID: "5ltq4hszw823",
-            },
-          }
+          config
         );
         console.log("3");
+        console.log(response);
       } catch (error) {
         alert(error.message);
+        console.error("Error response:", error.response.data);
+        console.error("Error status:", error.response.status);
       }
     } else {
       alert("Please enter all fields");
@@ -56,7 +60,7 @@ function Community() {
           value={Desc}
           onChange={(e) => setDesc(e.target.value)}
         ></textarea>
-        <div className="fileInput">
+        {/* <div className="fileInput">
           <label htmlFor="">Image</label>
           <input
             type="file"
@@ -66,7 +70,7 @@ function Community() {
             value={Image}
             onChange={(e) => setImage(e.target.value)}
           />
-        </div>
+        </div> */}
         <div className="create-community-buttons">
           <button
             style={{ backgroundColor: "blue", color: "white" }}
