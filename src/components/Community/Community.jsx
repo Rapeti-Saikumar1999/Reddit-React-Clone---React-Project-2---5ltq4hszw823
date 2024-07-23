@@ -30,7 +30,6 @@ function Community() {
         setTitle("");
         setDesc("");
         navigate("/");
-        console.log(response.data.data.owner);
       } catch (error) {
         alert(error.message);
       }

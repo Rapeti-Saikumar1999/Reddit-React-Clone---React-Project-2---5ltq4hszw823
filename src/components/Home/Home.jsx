@@ -33,7 +33,7 @@ function Home() {
 
   const [communities, setCommunities] = useState([]);
   const [Posts, setPosts] = useState([]);
-  console.log(communities);
+  // console.log(communities);
   const fetchPosts = async () => {
     const config = {
       headers: {
@@ -71,7 +71,7 @@ function Home() {
     );
 
     setCommunities(popular_communities);
-    console.log(communities);
+    // console.log(communities);
   };
 
   const filterSearch = async () => {
@@ -97,7 +97,7 @@ function Home() {
     try {
       const token = sessionStorage.getItem("token");
       const userId = sessionStorage.getItem("userId");
-      console.log("userid :" + userId);
+      // console.log("userid :" + userId);
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -109,7 +109,7 @@ function Home() {
         "https://academics.newtonschool.co/api/v1/reddit/channel/",
         config
       );
-      console.log(response.data.data[0].owner._id);
+      // console.log(response.data.data[0].owner._id);
       const myCommunitiesList = response.data.data.filter((e) => {
         return e.owner._id === userId;
       });
@@ -155,8 +155,15 @@ function Home() {
           </p>
           <div className="myCommunities">
             {myCommunities.map((e) => {
+              const id = e._id;
+              const name = e.name;
               return (
-                <p className="myEachCommunity">
+                <p
+                  className="myEachCommunity"
+                  onClick={() => {
+                    navigate("/displayCommunity", { state: { id, name } });
+                  }}
+                >
                   {" "}
                   <Face2RoundedIcon
                     style={{ fill: "blue", margin: "10px 10px 10px 10px" }}
@@ -247,8 +254,16 @@ function Home() {
         <div className="popular-communities">
           <h2 className="popular-communities-heading">Popular Communities </h2>
           {communities.map((community) => {
+            // console.log(community.name);
+            const id = community._id;
+            const name = community.name;
             return (
-              <div className="community">
+              <div
+                className="community"
+                onClick={() => {
+                  navigate("/displayCommunity", { state: { id, name } });
+                }}
+              >
                 {community.image ? (
                   <img src={community.image} alt="" width={50} />
                 ) : (
