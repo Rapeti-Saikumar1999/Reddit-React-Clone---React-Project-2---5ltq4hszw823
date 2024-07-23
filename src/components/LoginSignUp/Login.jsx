@@ -7,7 +7,7 @@ import axios from "axios";
 const Login = ({ close, openSignUp }) => {
   const [Email, setEmail] = useState("");
   const [Pwd, setPwd] = useState("");
-  const { setModalOpen, isLoggedIn, setIsLoggedIn } = useAuth();
+  const { setModalOpen, isLoggedIn, setIsLoggedIn, setUserId } = useAuth();
 
   const handleRef = (e) => {
     if (modelRef.current === e.target) {
@@ -38,11 +38,13 @@ const Login = ({ close, openSignUp }) => {
         config
       );
       const token = response.data.token;
+      const userid = response.data.data.user._id;
       if (token) {
         sessionStorage.setItem("token", token);
-        sessionStorage.setItem("userId", response.data.data.user._id);
+        sessionStorage.setItem("userId", userid);
         close();
         setIsLoggedIn(true);
+        setUserId(userid);
       }
     } catch (error) {
       alert(error.message);

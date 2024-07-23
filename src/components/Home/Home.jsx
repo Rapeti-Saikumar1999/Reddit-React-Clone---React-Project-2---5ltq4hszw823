@@ -28,10 +28,12 @@ function Home() {
     SignUpModalOpen,
     setSignUpModalOpen,
     isLoggedIn,
+    userId,
   } = useAuth();
 
   const [communities, setCommunities] = useState([]);
   const [Posts, setPosts] = useState([]);
+  console.log(communities);
   const fetchPosts = async () => {
     const config = {
       headers: {
@@ -57,7 +59,19 @@ function Home() {
       config
     );
 
-    setCommunities(response.data.data);
+    function getYear(dateString) {
+      const dateObject = new Date(dateString);
+      return dateObject.getFullYear();
+    }
+
+    // Sort data by year
+    const popular_communities = response.data.data;
+    popular_communities.sort(
+      (a, b) => getYear(a.createdAt) - getYear(b.createdAt)
+    );
+
+    setCommunities(popular_communities);
+    console.log(communities);
   };
 
   const filterSearch = async () => {
@@ -120,7 +134,7 @@ function Home() {
 
   useEffect(() => {
     fetchMyCommunities();
-  }, []);
+  }, [userId]);
 
   return (
     <div className="Home-container">
@@ -195,6 +209,7 @@ function Home() {
                     <p style={{ color: "black", fontWeight: "600" }}>
                       <RedditIcon style={{ marginRight: "5px" }} />{" "}
                       {post.author.name}
+                      {name}
                     </p>
                     <p>{date}</p>
                     <p>{time}</p>

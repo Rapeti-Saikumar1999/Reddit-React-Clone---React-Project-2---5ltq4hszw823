@@ -3,14 +3,18 @@ import "./NavBar.css";
 import { Routes, Route } from "react-router";
 import Logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
-import ControlledSwitches from "../Toggle/Toggle";
 import chatIcon from "../../assets/chat-icon.png";
 import { useAuth } from "../../Auth/AuthContextProvider";
 import { useNavigate } from "react-router";
 function NavBar() {
-  const { setSearchValue, setModalOpen, modalOpen, isLoggedIn, setIsLoggedIn } =
-    useAuth();
-  console.log(isLoggedIn);
+  const {
+    setSearchValue,
+    setModalOpen,
+    modalOpen,
+    isLoggedIn,
+    setIsLoggedIn,
+    setUserId,
+  } = useAuth();
   const navigate = useNavigate();
   return (
     <div className="nav-container">
@@ -32,7 +36,7 @@ function NavBar() {
             type="text"
             name=""
             id=""
-            placeholder="Search Reddit"
+            placeholder="Search Reddit by name....(ex:Tracey Mraz)"
             onChange={(e) => setSearchValue(e.target.value)}
           />
         </div>
@@ -58,6 +62,7 @@ function NavBar() {
                 onClick={() => {
                   setIsLoggedIn(!isLoggedIn);
                   sessionStorage.clear();
+                  setUserId("");
                   navigate("/");
                 }}
               >

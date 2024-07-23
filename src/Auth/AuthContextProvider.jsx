@@ -5,6 +5,7 @@ const AuthContext = createContext();
 const AuthContextProvider = ({ children }) => {
   let isUserLoggiedIn = sessionStorage.getItem("token") ? true : false;
   let [isLoggedIn, setIsLoggedIn] = useState(isUserLoggiedIn);
+  const [userId, setUserId] = useState();
 
   const [searchValue, setSearchValue] = useState("");
   const [modalOpen, setModalOpen] = useState(false);
@@ -21,6 +22,8 @@ const AuthContextProvider = ({ children }) => {
         setSignUpModalOpen,
         isLoggedIn,
         setIsLoggedIn,
+        userId,
+        setUserId,
       }}
     >
       {children}
