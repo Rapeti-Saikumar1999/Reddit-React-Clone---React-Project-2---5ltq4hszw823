@@ -8,7 +8,7 @@ function Community() {
   const [Desc, setDesc] = useState("");
   const HandleCreateCommunity = async (e) => {
     e.preventDefault();
-    if (Image && Title && Desc) {
+    if (Title && Desc) {
       try {
         const token = sessionStorage.getItem("token");
         const config = {

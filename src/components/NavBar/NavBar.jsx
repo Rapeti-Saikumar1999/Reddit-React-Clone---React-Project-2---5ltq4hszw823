@@ -3,9 +3,11 @@ import "./NavBar.css";
 import { Routes, Route } from "react-router";
 import Logo from "../../assets/logo.png";
 import { NavLink } from "react-router-dom";
-import chatIcon from "../../assets/chat-icon.png";
+import TextsmsOutlinedIcon from "@mui/icons-material/TextsmsOutlined";
 import { useAuth } from "../../Auth/AuthContextProvider";
 import { useNavigate } from "react-router";
+import VideocamIcon from "@mui/icons-material/Videocam";
+import NotificationsIcon from "@mui/icons-material/Notifications";
 function NavBar() {
   const {
     setSearchValue,
@@ -19,18 +21,18 @@ function NavBar() {
   return (
     <div className="nav-container">
       <div className="NavBar">
-        <div className="logo">
+        <div className="logo" onClick={() => navigate("/")}>
           <img src={Logo} alt="" style={{ height: "50px", width: "50px" }} />
           <span>reddit</span>
         </div>
-        <div className="navbar-dropdown">
+        {/* <div className="navbar-dropdown">
           <NavLink to="" style={{ textDecoration: "unset", color: "black" }}>
             Home
           </NavLink>
           <NavLink to="" style={{ textDecoration: "unset", color: "black" }}>
             Popular
           </NavLink>
-        </div>
+        </div> */}
         <div className="search-bar">
           <input
             type="text"
@@ -42,14 +44,15 @@ function NavBar() {
         </div>
         <div className="left-nav">
           <div className="chat-icon" style={{ cursor: "not-allowed" }}>
-            <img
-              src={chatIcon}
-              alt=""
-              style={{ height: "25px", width: "25px" }}
-            />
+            <TextsmsOutlinedIcon />
+            <VideocamIcon />
+            <NotificationsIcon />
           </div>
           <div className="create-post">
-            <NavLink to="" style={{ textDecoration: "none", color: "unset" }}>
+            <NavLink
+              to="/createPost"
+              style={{ textDecoration: "none", color: "unset" }}
+            >
               <p>
                 <span>+ </span>Create
               </p>

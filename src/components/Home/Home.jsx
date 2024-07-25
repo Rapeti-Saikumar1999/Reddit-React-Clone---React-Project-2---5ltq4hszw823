@@ -20,7 +20,12 @@ import AddIcon from "@mui/icons-material/Add";
 import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
+  const [toggleFollow, setToggleFollow] = useState(true);
   const [myCommunities, setMyCommunities] = useState([]);
+  const [Best, setBest] = useState(false);
+  const [Hot, setHot] = useState(false);
+  const [New, setNew] = useState(false);
+  const [Top, setTop] = useState(false);
   const {
     searchValue,
     modalOpen,
@@ -33,7 +38,6 @@ function Home() {
 
   const [communities, setCommunities] = useState([]);
   const [Posts, setPosts] = useState([]);
-  // console.log(communities);
   const fetchPosts = async () => {
     const config = {
       headers: {
@@ -97,7 +101,6 @@ function Home() {
     try {
       const token = sessionStorage.getItem("token");
       const userId = sessionStorage.getItem("userId");
-      // console.log("userid :" + userId);
       const config = {
         headers: {
           Authorization: `Bearer ${token}`,
@@ -109,7 +112,6 @@ function Home() {
         "https://academics.newtonschool.co/api/v1/reddit/channel/",
         config
       );
-      // console.log(response.data.data[0].owner._id);
       const myCommunitiesList = response.data.data.filter((e) => {
         return e.owner._id === userId;
       });
@@ -156,17 +158,22 @@ function Home() {
           <div className="myCommunities">
             {myCommunities.map((e) => {
               const id = e._id;
+              const CreatedAt = e.createdAt;
               const name = e.name;
               return (
                 <p
                   className="myEachCommunity"
-                  onClick={() => {
-                    navigate("/displayCommunity", { state: { id, name } });
+                  onClick={(e) => {
+                    e.preventDefault();
+
+                    navigate("/displayCommunity", {
+                      state: { id, name, CreatedAt },
+                    });
                   }}
                 >
                   {" "}
                   <Face2RoundedIcon
-                    style={{ fill: "blue", margin: "10px 10px 10px 10px" }}
+                    style={{ fill: "orangered", margin: "10px 10px 10px 10px" }}
                   />
                   {e.name}
                 </p>
@@ -179,9 +186,15 @@ function Home() {
         <div className="right-home">
           <div className="create-post-home">
             <Face2RoundedIcon
-              style={{ cursor: "not-allowed", fill: "darkgray" }}
+              style={{ cursor: "not-allowed", fill: "orangered" }}
             />
-            <input type="text" name="" id="" placeholder="Create Post" />
+            <input
+              type="text"
+              name=""
+              id=""
+              placeholder="Create Post"
+              onClick={() => navigate("/createPost")}
+            />
             <ImageIcon style={{ cursor: "not-allowed", fill: "darkgray" }} />
             <LocalOfferIcon
               style={{ cursor: "not-allowed", fill: "darkgray" }}
@@ -189,19 +202,28 @@ function Home() {
           </div>
           <div className="best-filters ">
             <p>
-              <RocketRoundedIcon />
+              <RocketRoundedIcon
+                style={{ fill: "blue" }}
+                onClick={() => setBest(!Best)}
+              />
               Best
             </p>
             <p>
-              <WhatshotRoundedIcon />
+              <WhatshotRoundedIcon
+                style={{ fill: "orangered" }}
+                onClick={() => setHot(!Hot)}
+              />
               Hot
             </p>
             <p>
-              <Brightness5RoundedIcon />
+              <Brightness5RoundedIcon
+                style={{ fill: "orange" }}
+                onClick={() => setNew(!New)}
+              />
               New
             </p>
             <p>
-              <NorthIcon />
+              <NorthIcon style={{ fill: "red" }} onClick={() => setTop(!Top)} />
               Top
             </p>
           </div>
@@ -210,6 +232,7 @@ function Home() {
               var createdAt = new Date(post.createdAt);
               var date = createdAt.toDateString();
               var time = createdAt.toLocaleTimeString();
+              console.log(post);
               return (
                 <div className="each-post" key={post._id}>
                   <div className="post-header">
@@ -252,26 +275,36 @@ function Home() {
       </div>
       <div className="left-home-container">
         <div className="popular-communities">
-          <h2 className="popular-communities-heading">Popular Communities </h2>
+          <div className="popular-communities-heading">
+            <h2>Popular Communities </h2>
+          </div>
           {communities.map((community) => {
-            // console.log(community.name);
+            // console.log(community);
             const id = community._id;
             const name = community.name;
+            const CreatedAt = community.createdAt;
             return (
               <div
                 className="community"
                 onClick={() => {
-                  navigate("/displayCommunity", { state: { id, name } });
+                  navigate("/displayCommunity", {
+                    state: { id, name, CreatedAt },
+                  });
                 }}
               >
                 {community.image ? (
                   <img src={community.image} alt="" width={50} />
                 ) : (
                   <Face2RoundedIcon
-                    style={{ fill: "orangered", margin: "10px 10px 10px 10px" }}
+                    style={{
+                      fill: "orangered",
+                      margin: "10px 10px 10px 10px",
+                    }}
                   />
                 )}
-                <span>{community.name}</span>
+                <span style={{ fontSize: "12px", fontWeight: "bold" }}>
+                  {community.name}
+                </span>
               </div>
             );
           })}

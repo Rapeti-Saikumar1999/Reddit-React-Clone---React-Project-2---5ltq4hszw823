@@ -1,0 +1,76 @@
+.createPost_container{
+
+background-color: rgba(173, 216, 230, 0.285);
+width: 100%;
+min-height: 100vh;
+display: flex;
+justify-content: center;
+align-items: flex-start;
+padding-top: 50px;
+}
+
+.createPost
+{
+    background-color: white;
+ padding: 40px;
+    border-radius: 5px;
+
+}
+
+.createPost form
+{
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.createPost form input{
+    border: 1px solid lightgray;
+    padding: 20px 20px;
+    border-radius: 5px;
+    font-weight: bold;
+    outline: none;
+}
+
+.createPost form textarea
+{
+font-weight: bold;
+padding: 20px;
+}
+
+.post_image_upload
+{
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-weight: bold;
+}
+.post_buttons
+{
+    display: flex;
+    flex-direction: row;
+    gap: 20px;
+    
+}
+
+.post_buttons button
+{
+    padding: 10px 20px;
+    font-weight: bold;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.post_create_button
+{
+    background-color: blue;
+color: white;
+border: none;
+}
+
+.post__cancel_button
+{
+    background-color: white;
+    border: 1px solid blue;
+    color: blue;
+}
