@@ -45,6 +45,14 @@ function CreatePost() {
       alert("Please enter all fields");
     }
   };
+
+  const handleCancelPost = () => {
+    setTitle("");
+    setContent("");
+    setImage("");
+    navigate("/");
+  };
+
   return (
     <div className="createPost_container">
       <div className="createPost">
@@ -75,7 +83,9 @@ function CreatePost() {
             <button className="post_create_button" onClick={handleCreatePost}>
               Create Post
             </button>
-            <button className="post__cancel_button">Cancel</button>
+            <button className="post__cancel_button" onClick={handleCancelPost}>
+              Cancel
+            </button>
           </div>
         </form>
       </div>

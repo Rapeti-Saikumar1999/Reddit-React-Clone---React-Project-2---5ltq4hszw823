@@ -17,6 +17,7 @@ import { useAuth } from "../../Auth/AuthContextProvider";
 import Login from "../LoginSignUp/Login";
 import SignUp from "../LoginSignUp/SignUp";
 import AddIcon from "@mui/icons-material/Add";
+import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOutlined";
 import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
@@ -26,6 +27,7 @@ function Home() {
   const [Hot, setHot] = useState(false);
   const [New, setNew] = useState(false);
   const [Top, setTop] = useState(false);
+  console.log(Best);
   const {
     searchValue,
     modalOpen,
@@ -201,29 +203,20 @@ function Home() {
             />
           </div>
           <div className="best-filters ">
-            <p>
-              <RocketRoundedIcon
-                style={{ fill: "blue" }}
-                onClick={() => setBest(!Best)}
-              />
+            <p onClick={() => setBest(!Best)}>
+              <RocketRoundedIcon style={{ fill: "blue" }} />
               Best
             </p>
-            <p>
-              <WhatshotRoundedIcon
-                style={{ fill: "orangered" }}
-                onClick={() => setHot(!Hot)}
-              />
+            <p onClick={() => setHot(!Hot)}>
+              <WhatshotRoundedIcon style={{ fill: "orangered" }} />
               Hot
             </p>
-            <p>
-              <Brightness5RoundedIcon
-                style={{ fill: "orange" }}
-                onClick={() => setNew(!New)}
-              />
+            <p onClick={() => setNew(!New)}>
+              <Brightness5RoundedIcon style={{ fill: "orange" }} />
               New
             </p>
-            <p>
-              <NorthIcon style={{ fill: "red" }} onClick={() => setTop(!Top)} />
+            <p onClick={() => setTop(!Top)}>
+              <NorthIcon style={{ fill: "red" }} />
               Top
             </p>
           </div>
@@ -232,7 +225,7 @@ function Home() {
               var createdAt = new Date(post.createdAt);
               var date = createdAt.toDateString();
               var time = createdAt.toLocaleTimeString();
-              console.log(post);
+
               return (
                 <div className="each-post" key={post._id}>
                   <div className="post-header">
@@ -308,6 +301,28 @@ function Home() {
               </div>
             );
           })}
+        </div>
+        <div className="Premium_container">
+          <div className="premium">
+            <div className="premium_icon">
+              <WorkspacePremiumOutlinedIcon
+                style={{ fill: "orangered", fontSize: "50px" }}
+              />
+            </div>
+            <div className="premiumBody">
+              <h4>Reddit Premium</h4>
+              <p>The best Reddit experience, with monthly Coins</p>
+            </div>
+          </div>
+          <button
+            className="premium_TryOut"
+            onClick={(e) => {
+              e.preventDefault();
+              navigate("/premium");
+            }}
+          >
+            Try Now !
+          </button>
         </div>
       </div>
       {modalOpen && (

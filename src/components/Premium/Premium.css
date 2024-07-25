@@ -1,0 +1,13 @@
+.Premium_container2
+{
+    border-radius: unset;
+    margin-top: unset;
+    width: 100%;
+    min-height: 100vh;
+   background-image: url("https://i.insider.com/5ecec3c3f0f419136672b285?width=1200format=jpeg&auto=webp");
+   background-position: center;
+   background-repeat: no-repeat; 
+   background-size: cover; 
+margin-bottom: 20px;
+
+}

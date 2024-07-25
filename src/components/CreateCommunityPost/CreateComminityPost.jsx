@@ -54,6 +54,16 @@ function CreateCommunityPost() {
       alert("Please enter all fields");
     }
   };
+
+  const handleCancelPost = () => {
+    setTitle("");
+    setContent("");
+    setImage("");
+    navigate("/displayCommunity", {
+      state: { id, name, CreatedAt },
+    });
+  };
+
   return (
     <div className="createPost_container">
       <div className="createPost">
@@ -84,7 +94,9 @@ function CreateCommunityPost() {
             <button className="post_create_button" onClick={handleCreatePost}>
               Create Post
             </button>
-            <button className="post__cancel_button">Cancel</button>
+            <button className="post__cancel_button" onClick={handleCancelPost}>
+              Cancel
+            </button>
           </div>
         </form>
       </div>

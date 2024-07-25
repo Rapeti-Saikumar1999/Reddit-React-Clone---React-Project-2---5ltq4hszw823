@@ -7,6 +7,7 @@ import Community from "./Community/Community";
 import DisplayCommunity from "./DisplayCommunity/DisplayCommunity";
 import CreatePost from "./CreatePost/CreatePost";
 import CreateCommunityPost from "./CreateCommunityPost/CreateComminityPost";
+import Premium from "./Premium/Premium";
 function App() {
 
   return <div>
@@ -17,6 +18,7 @@ function App() {
       <Route path="/displayCommunity" element={<DisplayCommunity />}/>
       <Route path="/createPost" element={<CreatePost />}/>
       <Route path="/createCommunityPost" element={<CreateCommunityPost />}/>
+      <Route path="/premium" element={<Premium />}/>
     </Routes>
   </div>;
 }
