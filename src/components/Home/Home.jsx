@@ -1,4 +1,4 @@
-import React, { useEffect, useId, useState } from "react";
+import React, { useEffect, useState } from "react";
 import "./Styles/Home.css";
 import ImageIcon from "@mui/icons-material/Image";
 import LocalOfferIcon from "@mui/icons-material/LocalOffer";
@@ -21,13 +21,11 @@ import WorkspacePremiumOutlinedIcon from "@mui/icons-material/WorkspacePremiumOu
 import { useNavigate } from "react-router-dom";
 function Home() {
   const navigate = useNavigate();
-  const [toggleFollow, setToggleFollow] = useState(true);
   const [myCommunities, setMyCommunities] = useState([]);
   const [Best, setBest] = useState(false);
   const [Hot, setHot] = useState(false);
   const [New, setNew] = useState(false);
   const [Top, setTop] = useState(false);
-  console.log(Best);
   const {
     searchValue,
     modalOpen,
@@ -77,7 +75,6 @@ function Home() {
     );
 
     setCommunities(popular_communities);
-    // console.log(communities);
   };
 
   const filterSearch = async () => {

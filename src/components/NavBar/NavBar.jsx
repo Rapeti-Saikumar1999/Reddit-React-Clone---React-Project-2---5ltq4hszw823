@@ -25,14 +25,6 @@ function NavBar() {
           <img src={Logo} alt="" style={{ height: "50px", width: "50px" }} />
           <span>reddit</span>
         </div>
-        {/* <div className="navbar-dropdown">
-          <NavLink to="" style={{ textDecoration: "unset", color: "black" }}>
-            Home
-          </NavLink>
-          <NavLink to="" style={{ textDecoration: "unset", color: "black" }}>
-            Popular
-          </NavLink>
-        </div> */}
         <div className="search-bar">
           <input
             type="text"

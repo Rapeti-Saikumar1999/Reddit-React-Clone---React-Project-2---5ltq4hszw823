@@ -97,7 +97,7 @@ const Login = ({ close, openSignUp }) => {
             margin: "10px",
           }}
         >
-          Don't have an acoount ?
+          Don't have an account ?
           <span
             style={{ color: "blue", marginLeft: "10px", cursor: "pointer" }}
             onClick={openSignUp}

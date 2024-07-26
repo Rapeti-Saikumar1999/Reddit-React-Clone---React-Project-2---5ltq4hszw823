@@ -1,4 +1,3 @@
-// src/LoginForm.js
 import React, { useRef, useState } from "react";
 import CloseIcon from "@mui/icons-material/Close";
 import { useAuth } from "../../Auth/AuthContextProvider";
