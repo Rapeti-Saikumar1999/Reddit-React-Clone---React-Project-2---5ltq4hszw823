@@ -40,7 +40,6 @@ const SignUp = ({ close, openLogin }) => {
         config
       );
       const token = response.data.token;
-      // console.log(response.data.data.user._id);
       if (token) {
         sessionStorage.setItem("token", token);
         sessionStorage.setItem("userId", response.data.data.user._id);
