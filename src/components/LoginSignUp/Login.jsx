@@ -71,7 +71,7 @@ const Login = ({ close, openSignUp }) => {
           onClick={close}
         />
         <form action="" onSubmit={handleLogin}>
-          <h2>Login</h2>
+          <h2 style={{ fontSize: "20px" }}>Login</h2>
           <input
             type="email"
             name=""
@@ -88,7 +88,7 @@ const Login = ({ close, openSignUp }) => {
             value={Pwd}
             onChange={(e) => setPwd(e.target.value)}
           />
-          <button type="submit">Login</button>
+          <button type="submit">Submit</button>
         </form>
         <p
           style={{

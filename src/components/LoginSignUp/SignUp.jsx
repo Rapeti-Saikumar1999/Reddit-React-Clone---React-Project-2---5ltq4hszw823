@@ -74,7 +74,7 @@ const SignUp = ({ close, openLogin }) => {
           onClick={close}
         />
         <form action="" onSubmit={handleSubmit}>
-          <h2>Sign Up</h2>
+          <h2 style={{ fontSize: "20px" }}>Sign Up</h2>
           <input
             type="text"
             name=""
@@ -104,7 +104,7 @@ const SignUp = ({ close, openLogin }) => {
             style={{ marginBottom: "20px" }}
             onClick={handleSignUp}
           >
-            SignUp
+            Submit
           </button>
         </form>
       </div>
